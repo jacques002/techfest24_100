@@ -19,3 +19,9 @@ class ExplainController:
     
     async def get_definition(self, explainRequest: ExplainRequest):
         return await ExplainAgent().gen_definitions(explainRequest.query)
+    
+    async def get_analogy(self, explainRequest: ExplainRequest):
+        return await ExplainAgent().gen_analogy(explainRequest.query)
+    
+    async def get_example(self, explainRequest: ExplainRequest):
+        return await ExplainAgent().gen_example(explainRequest.query)

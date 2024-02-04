@@ -17,3 +17,17 @@ async def get_image(explainRequest:ExplainRequest=Depends()):
 async def get_definition(explainRequest:ExplainRequest=Depends()):
     explainController = await ExplainController().get_instance()
     return await explainController.get_definition(explainRequest)
+
+@explain_router.get(
+    path='/explain/get_analogy',
+    tags=["dictionary"])
+async def get_analogy(explainRequest:ExplainRequest=Depends()):
+    explainController = await ExplainController().get_instance()
+    return await explainController.get_analogy(explainRequest)
+
+@explain_router.get(
+    path='/explain/get_example',
+    tags=["dictionary"])
+async def get_example(explainRequest:ExplainRequest=Depends()):
+    explainController = await ExplainController().get_instance()
+    return await explainController.get_example(explainRequest)
