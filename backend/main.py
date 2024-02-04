@@ -2,6 +2,7 @@ from fastapi import FastAPI
 import os 
 from dotenv import load_dotenv
 from src.routers.explain_router import explain_router
+from src.routers.chat_router import chat_router
 from fastapi.middleware.cors import CORSMiddleware
 load_dotenv()
 
@@ -16,6 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(explain_router)
+app.include_router(chat_router)
 
 @app.get(
         path="/",

@@ -9,6 +9,7 @@ class ExplainController:
     def __init__(self):
         pass
 
+    @classmethod
     async def get_instance(self):
         if ExplainController.instance is None:
             ExplainController.instance = ExplainController()
