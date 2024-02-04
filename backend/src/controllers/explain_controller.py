@@ -1,4 +1,5 @@
 from src.agents.image_agent import ImageAgent
+from src.agents.explain_agent import ExplainAgent
 from src.schemas.explain_schemas import ExplainRequest
 
 class ExplainController:
@@ -16,3 +17,5 @@ class ExplainController:
     async def get_image(self, explainRequest: ExplainRequest):
         return await ImageAgent().gen_image(explainRequest.query)
     
+    async def get_definition(self, explainRequest: ExplainRequest):
+        return await ExplainAgent().gen_definitions(explainRequest.query)

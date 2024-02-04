@@ -10,3 +10,10 @@ explain_router = APIRouter()
 async def get_image(explainRequest:ExplainRequest=Depends()):
     explainController = await ExplainController().get_instance()
     return await explainController.get_image(explainRequest)
+
+@explain_router.get(
+    path='/explain/get_definition',
+    tags=["dictionary"])
+async def get_definition(explainRequest:ExplainRequest=Depends()):
+    explainController = await ExplainController().get_instance()
+    return await explainController.get_definition(explainRequest)
