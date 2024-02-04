@@ -41,6 +41,7 @@ const ChatInput = (props) => {
     },[isListening])
 
     const handleSubmit = (e) => {
+        if (isListening===true) return;
         e.preventDefault();
         if (text.length === 0) {
             return;
@@ -67,7 +68,7 @@ const ChatInput = (props) => {
             {isListening===false && <TiMicrophoneOutline size={36}/>}
             {isListening===true && <TiMicrophone size={36}/>}
         </div>
-        <div className={styles.ChatButton} onClick={handleSubmit}>
+        <div className={`${styles.ChatButton} ${styles[isListening]} ${styles.SendButton}`} onClick={handleSubmit}>
             {isListening===false && <p>Send</p>}
             {isListening===true && <p>Listening</p>}
         </div>

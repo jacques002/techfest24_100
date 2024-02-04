@@ -9,12 +9,13 @@ const ChatMessageHolder = (props) => {
   }
   useEffect(()=>{
     scrollToBottom()
-  },[props.messages])
+  },[props.messages,props.lastMessage])
   return (
     <div className={styles.ChatMessageHolder}>
       {props.messages.map((message,index)=>( 
-        <ChatMessage key={index} entity={message.entity} message={message.message}/>
+        <ChatMessage key={index} entity={message.entity} message={message.message} appeared={message.appeared}/>
       ))}
+      {props.lastMessage.length>0 && <ChatMessage entity={"bot"} message={props.lastMessage} appeared={false}/>}
       <div ref={messagesEndRef} />
     </div>
   )
