@@ -1,0 +1,14 @@
+@import "../../styles/theme.scss";
+
+.text-box {
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 2px solid $grey; // Example border color
+    border-radius: 4px; // Rounded corners
+    outline: none; // Removes the outline on focus
+    
+    &:focus {
+      border-color: $secondary-color; // Darker border color on focus
+    }
+  }
+  
