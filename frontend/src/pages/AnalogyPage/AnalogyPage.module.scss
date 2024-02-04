@@ -1,23 +1,30 @@
 @import '../.././styles/theme.scss';
 
-.image_container{
+.flex_box{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50vw;
-    height: auto;
-    border-radius: 1rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    width: 100vw;
     background-color: $background-color;
-    transition: all 0.3s ease;
-    cursor: pointer;
-
-    .image{
-        width: 100%;
-        height: auto;
-        border-radius: 1rem;
-        object-fit: cover;
+    .search_box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 10vh;
+        width: auto;
+        margin-top: 40vh;
+        .search_button{
+            height: 100%;
+            width: 10%;
+            border-radius: 1rem;
+            border: none;
+            color: black;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            &:hover{
+                color: $primary-color;
+            }
+        }
     }
 }
-
