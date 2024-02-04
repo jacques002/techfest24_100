@@ -38,7 +38,7 @@ const AnalogyPage = () => {
 
     return (
         <div>
-            {openWordCard && (</WordCard>)}
+            {/* {openWordCard && (</WordCard>)} */}
             
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>

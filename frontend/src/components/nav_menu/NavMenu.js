@@ -2,7 +2,7 @@ import styles from './nav_menu.module.scss'
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const NavMenu = () => {
+const NavMenu = (props) => {
   const [menuItems, setMenuItems] = useState([]);
 
   const location = useLocation();
