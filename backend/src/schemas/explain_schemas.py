@@ -14,7 +14,9 @@ class ExplainRequest(BaseModel):
         if v == "":
             raise ValueError('query must not be empty')
         return v
-    
+class ImageResponse(BaseModel):
+    status: Status = Field(..., description="The status of the response")
+    url: str = Field(..., description="The url of the image")
 class Definition(BaseModel):
     id:int = Field(..., description="The id of the definition")
     article: str = Field(..., description="The word or phrase being defined")
