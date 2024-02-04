@@ -20,7 +20,7 @@ const NavMenu = (props) => {
 
 
   return (
-    <div className={styles.nav_memu}>
+    <div className={`${styles.nav_memu} ${props.menuOpen?styles.Open:styles.Close}`}>
       {menuItems.map((item, index) => (
         <div className={styles.item_box}>
           <div key={index} className={styles.nav_menu_item}>

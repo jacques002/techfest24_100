@@ -8,8 +8,19 @@
     background-color: $light;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     height: 8vh;
-    z-index: 100;
+    z-index: 101;
     position: relative; 
+}
+
+.navbar_back{
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100%; 
+    background-color: $light; 
+    z-index: 101; 
+    opacity: 1; 
 }
 
 .h1{
@@ -26,6 +37,7 @@
     left: 1rem;
     z-index: 101;
     max-width: 50px;
+    cursor: pointer;
 }
 
 .app_logo{
@@ -41,6 +53,7 @@
     font-weight: 800;
     margin: 1rem;
     text-decoration: none;
+    z-index: 102;
     &:hover{
         color: $primary-color;
     }

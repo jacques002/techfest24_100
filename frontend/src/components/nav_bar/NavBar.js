@@ -14,8 +14,9 @@ const NavBar = () => {
     return (
         <div>
             <div className={styles.navbar}>
+                <div className={styles.navbar_back}></div>
                 <MenuIcon className={styles.menu_icon} onClick={openMenu} />
-                {menu && <NavMenu />}
+                {<NavMenu menuOpen={menu}/>}
                 <Link to="/" className={styles.header_link}><h3>Analogy</h3></Link>
                 <Link to="/Story" className={styles.header_link}><h3>Story</h3></Link>
                 <Link to="/Chat" className={styles.header_link}><h3>Chat</h3></Link>
