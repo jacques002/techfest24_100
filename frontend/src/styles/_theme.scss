@@ -28,6 +28,10 @@ $light-green: #E0F9B5;
 $red: #F38181;
 $grey: #D3D3D3;
 
+
+$nav-menu-width:200px;
+$nav-bar-height:10vh;
+
 @mixin theme {
 $background-color: #F5EEE6;
   color: $text-color;
