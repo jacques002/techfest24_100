@@ -7,9 +7,10 @@ class ImageAgent:
 
     async def gen_image(self, query:str):
         try:
+            _prompt= f"Generate an image that encapsulates this word/phrase: {query}"
             response = await self.client.images.generate(
                 model=self.model,
-                prompt=query,
+                prompt=_prompt,
                 size="1024x1024",
                 quality="standard",
                 n=1,
