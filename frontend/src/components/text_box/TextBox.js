@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './TextBox.module.scss';
+import styles from './TextBox.module.scss';
 
-const TextBox = ({ onUserInput }) => {
+const TextBox = ({ onUserInput, inlineStyle }) => {
     const handleChange = (event) => {
         // Call the onUserInput function passed as a prop with the new input value
         onUserInput(event.target.value);
@@ -14,13 +14,11 @@ const TextBox = ({ onUserInput }) => {
     };
 
     return (
-        <h3
-            className="text-box"
+        <input
+            className={styles.text_box}
+            style={inlineStyle} // Apply inline styles passed as prop
             contentEditable={true}
-            placeholder="Type something..."
-            onInput={handleChange} // Set the handleChange function to be called on input change
-            onKeyPress={handleKeyPress} // Set the handleKeyPress function to be called on key press
-        ></h3>
+        ></input>
     );
 };
 
