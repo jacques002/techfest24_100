@@ -6,20 +6,20 @@ import NavMenu from '../../components/nav_menu/NavMenu.js';
 import { Link } from 'react-router-dom'; // Just import Link
 
 const NavBar = () => {
-    const [menu, setMenu] = useState(false);
-    const openMenu = () => {
-        setMenu(!menu)
-    }
+    const [menu, setMenu] = useState(true);
+    // const openMenu = () => {
+    //     setMenu(!menu)
+    // }
 
     return (
         <div>
             <div className={styles.navbar}>
                 <div className={styles.navbar_back}></div>
-                <MenuIcon className={styles.menu_icon} onClick={openMenu} />
+                {/* <MenuIcon className={styles.menu_icon} onClick={openMenu} /> */}
                 {<NavMenu menuOpen={menu}/>}
-                <Link to="/" className={styles.header_link}><h3>Analogy</h3></Link>
-                <Link to="/Story" className={styles.header_link}><h3>Story</h3></Link>
-                <Link to="/Chat" className={styles.header_link}><h3>Chat</h3></Link>
+                <Link to="/home/Analogy" className={styles.header_link}><h3>Analogy</h3></Link>
+                <Link to="/home/Story" className={styles.header_link}><h3>Story</h3></Link>
+                <Link to="/home/Chat" className={styles.header_link}><h3>Chat</h3></Link>
                 <img src={app_logo} alt="App Logo" className={styles.app_logo} />
             </div>
         </div>

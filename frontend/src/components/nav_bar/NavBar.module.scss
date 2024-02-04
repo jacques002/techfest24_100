@@ -4,10 +4,11 @@
     text-align: center;
     display: flex;
     justify-content: center;
-    padding: 1rem 2rem;
+    padding-bottom: 2vh;
     background-color: $light;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     height: 8vh;
+    width: 100vw;
     z-index: 101;
     position: relative; 
 }

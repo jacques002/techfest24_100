@@ -9,11 +9,11 @@ const NavMenu = (props) => {
 
   useEffect(() => {
     // Check the current path using location.pathname
-    if (location.pathname === '/Chat') {
+    if (location.pathname === '/home/Chat') {
       setMenuItems([{ name: 'chat 1' }, { name: 'chat 2'}, { name: 'chat 3' }]);
-    } else if (location.pathname === '/Story') {
+    } else if (location.pathname === '/home/Story') {
       setMenuItems([{ name: 'story 1' }, { name: 'story 2' }, { name: 'story 3' }]);
-    } else if (location.pathname === '/') {
+    } else if (location.pathname === '/home/Analogy') {
       setMenuItems([{ name: 'word 1' }, { name: 'word 2' }, { name: 'word 3' }]);
     }
   }, [location]); // Dependency array includes location to re-run the effect when the path changes

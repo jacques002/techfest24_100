@@ -9,17 +9,21 @@ import Chat from './pages/ChatPage/ChatPage.js'
 
 const router = () => {
   return (
-    <div>
+    <>
         <Routes>
-            <Route path="/" element={<Analogy />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/story" element={<Story />} />
-            <Route path="/chat" element={<Chat />} />
+        <Route path="/" element={<Login />} />
 
+        <Route path="/register" element={<Register />}/>
 
-        </Routes>
-    </div>
+        <Route path="/home" element={<Home />}>
+          <Route path="/home/analogy" element={<Analogy />} />
+          <Route path="/home/story" element={<Story />} />
+          <Route path="/home/chat" element={<Chat />} />
+          
+      </Route>
+      <Route path="*" element={<h1>Not Found</h1>} />
+      </Routes>
+    </>
   )
 }
 
