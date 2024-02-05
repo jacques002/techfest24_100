@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './TextBox.module.scss';
 
-const TextBox = ({ onUserInput, inlineStyle }) => {
+const TextBox = ({ onUserInput, size, value }) => {
     const handleChange = (event) => {
         // Call the onUserInput function passed as a prop with the new input value
         onUserInput(event.target.value);
     };
 
-    const handleKeyPress = (event) => {
-        if (event.key === 'Enter') {
-            handleChange(event);
-        }
+    const fontSize = {
+        fontSize: typeof size === 'number' ? `${size}px` : size, 
     };
 
     return (
         <input
             className={styles.text_box}
-            style={inlineStyle} // Apply inline styles passed as prop
-            contentEditable={true}
-        ></input>
+            value={value}
+            onChange={handleChange}
+            style={fontSize} // Apply inline styles with the font size
+        />
     );
 };
 

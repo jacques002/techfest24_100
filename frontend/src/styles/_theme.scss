@@ -33,7 +33,7 @@ $nav-menu-width:200px;
 $nav-bar-height:10vh;
 
 @mixin theme {
-$background-color: #F5EEE6;
+  background-color: #F5EEE6;
   color: $text-color;
 }
   
@@ -52,3 +52,4 @@ $background-color: #F5EEE6;
     font-weight: bold;
   }
 }
+
