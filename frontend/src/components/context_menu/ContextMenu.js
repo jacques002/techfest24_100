@@ -18,8 +18,6 @@ const ContextMenu = ({ isVisible, position, onCopy }) => {
       <div className={styles.button} onClick={onCopy}>Define</div>
       <div className={styles.button} onClick={onCopy}>Read</div>
       <div className={styles.button} onClick={onCopy}>Copy</div>
-
-
       {/* Add more buttons/options as needed */}
     </div>
   );

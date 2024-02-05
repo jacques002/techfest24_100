@@ -29,7 +29,7 @@ $red: #F38181;
 $grey: #D3D3D3;
 
 @mixin theme {
-$background-color: #F5EEE6;
+  background-color: #F5EEE6;
   color: $text-color;
 }
   
@@ -48,3 +48,4 @@ $background-color: #F5EEE6;
     font-weight: bold;
   }
 }
+

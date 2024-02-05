@@ -1,5 +1,7 @@
 // Typography variables
-$font-main: "Nunito", sans-serif;
+$font-text: 'Red Hat Display', sans-serif;
+$font-subheader: 'Josefin Sans', sans-serif;
+$font-main: 'Rubik', sans-serif;
 $font-size-base: 18px;
 $line-height-base: 1.5;
 $text-color: #f8f3f3;
@@ -14,14 +16,18 @@ body {
   }
   
   h1, h2, h3{
+    font-family: $font-main;
     font-weight: bold;
+    animation: text-fade-in 1s ease-in-out;
   }
 
   h4{
+    font-family: $font-subheader;
     color: $header-color;
   }
   
   h5, h6 {
+    font-family: $font-text;
     font-weight: bold;
     font-size: 16px;
   }
