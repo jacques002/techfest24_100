@@ -4,12 +4,40 @@ class ChatAgent:
     def __init__(self):
         self.client=AsyncOpenAI()
         self.scenario_dict = {}
+        self.user_scenario_dict={}
         pass
 
-    async def stream_response(self, new_message: str):
+    async def stream_response(self, data_dict: dict,username:str):
+        scenario_template={
+            'protagonist':{
+                'name':username,
+                'personality':'blank slate'
+            },
+            'other_party':{
+                'name':data_dict['name'],
+                'personality':data_dict['personality']
+            },
+            'setting':{
+                'atmosphere':data_dict['personality'],
+                'location':data_dict['personality'],
+                'language': data_dict['language']
+            },
+        }
+        messages = [{
+            'role': 'system',
+            'content': f"""You are {scenario_template['other_party']['name']} whose personality is {scenario_template['other_party']['personality']}.
+            You must continue the roleplay in the situation as described below with the correct language, {scenario_template['setting']['language']}, found in settings.
+            {
+                scenario_template
+            }
+            """
+        }]
+        for i in data_dict['messages']:
+            messages.append(i)
+        print(messages)
         stream = self.client.chat.completions.create(
             model="gpt-4",
-            messages=[{"role": "user", "content": f"{new_message}"}],
+            messages=messages,
             stream=True,
         )
         return stream
@@ -38,6 +66,10 @@ class ChatAgent:
             input=text
         )
         return response.content
+    
+    async def set_user_scenario(self,username:str,chatBuildRequest:ChatBuildRequest):
+        self.user_scenario_dict[username]=chatBuildRequest
+        return self.user_scenario_dict
     
     async def stream_scenario(self, chatBuildRequest:ChatBuildRequest,username:str):
         scenario_template={
