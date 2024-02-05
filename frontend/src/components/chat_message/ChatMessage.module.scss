@@ -46,7 +46,9 @@ $chat-input-height: 10vh;
         word-wrap:break-word;
         text-align: left;
         width: calc(100% - 2 * $space);
-        text-transform: capitalize;
+        &::first-letter{
+            text-transform: capitalize;
+        }
     }
     &.user{
         align-self: flex-end;

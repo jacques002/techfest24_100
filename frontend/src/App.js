@@ -1,9 +1,8 @@
 import './App.scss';
 import Router from './router.js';
 import { BrowserRouter } from 'react-router-dom';
-import NavBar from './components/nav_bar/NavBar.js';
-import ContextMenu from './components/context_menu/ContextMenu.js';
-import { useState } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 // eslint-disable-next-line
 
 function App() {
@@ -16,6 +15,7 @@ function App() {
           
           <Router />
         </BrowserRouter>
+        <ToastContainer />
         
     </div>
   );

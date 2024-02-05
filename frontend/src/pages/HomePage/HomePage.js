@@ -29,13 +29,19 @@ const HomePage = () => {
       // Optionally, show a notification that text has been copied
     });
   };
+
+  const handleRead = () =>{
+    // Can change to llm call if needed for more variety. From /chat/get_audio endpoint
+    const utterance = new SpeechSynthesisUtterance(selectedText);
+    speechSynthesis.speak(utterance);
+  }
   return (
     <div className={styles.HomePage}  onContextMenu={handleRightClick} onClick={handleGlobalClick} style={{ minHeight: '100vh' }}>
       <NavBar />
       <div className={styles.Outlet}>
       <Outlet/>
       </div>
-      <ContextMenu isVisible={isMenuVisible} position={menuPosition} onCopy={handleCopy} />
+      <ContextMenu isVisible={isMenuVisible} position={menuPosition} onCopy={handleCopy} onRead={handleRead}/>
     </div>
   )
 }
