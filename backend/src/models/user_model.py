@@ -2,11 +2,12 @@ from src.databases.database import Database
 from src.schemas.user_schemas import Role
 from src.schemas.auth_schemas import RegisterRequest
 from fastapi.responses import JSONResponse
+import os
 
 class UserModel:
     def __init__(self):
         self.df = Database()
-        self.table_name = 'top_authentication'
+        self.table_name = os.getenv("AUTH_TBLE_NAME") #'top_authentication'
 
     async def create_user(self, register_request:RegisterRequest)->dict:
         payload = register_request.dict()
