@@ -4,6 +4,7 @@ import axios from 'axios';
 import WordCard from './components/WordCard.js';
 import TextBox from '../../components/text_box/TextBox.js';
 import { GiSpellBook } from "react-icons/gi";
+import axiosInstance from '../../utils/axiosinstance.js';
 
 const AnalogyPage = () => {
     const [newWord, setNewWord] = React.useState('happiness');
@@ -16,16 +17,17 @@ const AnalogyPage = () => {
 
     const getDefinition = async () => {
         try {
-            const response = await axios.get(`https://techfest24-100-backend.onrender.com/explain/get_definition?query=${newWord}`);
+            const headers={headers:
+                {
+                    'Authorization':localStorage.getItem('token')
+                }}            
+            const response = await axiosInstance.get(`https://techfest24-100-backend.onrender.com/explain/get_definition?query=${newWord}`,headers);
             console.log(newWord);
             console.log(response.data.content);
             const def_array = response.data.content.map(item => item.definition);
-            // all definitions in an array
             console.log(def_array);
-            // output each definition
             if (!word_dictionary[newWord]) word_dictionary[newWord] = [];
             def_array.forEach((def) => {
-                // add new definition objects to the array
                 word_dictionary[newWord].push({ "definition": def, "analogy": "" }); // Assuming analogy is blank for new definitions
             });
             console.log('here');
@@ -60,9 +62,13 @@ const AnalogyPage = () => {
     return (
         <div>
             {!openWordCard && (
-                <div className={styles.container}>
-                    <div className={styles.box} style={{ marginTop: '30vh' }}>
-                        <TextBox onUserInput={handleNewWord} size='5vw' />
+                <div className={styles.searchContainer}>
+                    <div className={styles.searchbar} >
+                        
+                        <div className={styles.searchStack}>
+                        <label style={{color:'white'}}>Search for a word</label>
+                        <input type="text" placeholder="Search for a word" onChange={(e) => handleNewWord(e.target.value)} />
+                        </div>
                         <GiSpellBook className={styles.search_button} onClick={() => handleClick()} />
                     </div>
                 </div>

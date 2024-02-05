@@ -2,7 +2,7 @@ import React from 'react'
 import style from './LoginPage.module.scss'
 import LoginForm from '../../components/login_form/LoginForm.js'
 import axios from 'axios'
-
+import logo from '../../assets/icons/app_logo.png'
 const LoginPage = () => {
   const [serverUp,setServerUp] = React.useState(false)
   React.useEffect(() => {
@@ -24,6 +24,7 @@ const LoginPage = () => {
 
   return (
     <div className={style.Holder}>
+      
       {serverUp===false && <div className={style.Loader}>
         <div className={style.LoadGroup}>
           <div className={style.Backdrop}/>
@@ -37,7 +38,7 @@ const LoginPage = () => {
         </div>
       </div>}
         <LoginForm />
-        <img className={style.Backdrop} src="https://images.unsplash.com/photo-1529154166925-574a0236a4f4?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+        <img className={style.Backdrop} src="https://images.unsplash.com/photo-1536147116438-62679a5e01f2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
     </div>
   )
 }

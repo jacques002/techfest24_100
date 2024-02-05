@@ -3,10 +3,10 @@ import style from './LoginForm.module.scss'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import app_logo from '../../assets/icons/app_logo.png'
 const LoginForm = () => {
-    const [username, setUsername] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [team, setTeam] = React.useState('Zagreus');
+    const [username, setUsername] = React.useState('jacques5');
+    const [password, setPassword] = React.useState('Jacques5');
     const host=process.env.REACT_APP_BACKEND
 
     let navigate = useNavigate();
@@ -22,7 +22,7 @@ const LoginForm = () => {
             localStorage.setItem('token', 'Bearer ' + res.data.token);
             console.log(res.data);
             toast.success('Login Successful!');
-            navigate('/aphrodite')
+            navigate('/home/chat')
         }).catch((err) => {
             toast.error('Login Failed!');
             console.log(err.response.data.message);
@@ -34,8 +34,7 @@ const LoginForm = () => {
         event.preventDefault(); 
         const payload = {
             username: username,
-            password: password,
-            team_name: team
+            password: password
         }
         axios.post(host+'/user/register', payload).then((res) => {
             console.log(res.data);
@@ -52,8 +51,9 @@ const LoginForm = () => {
     <div className={style.Holder}>
         
         <div className={style.Form}>
-            <h1>Login (Demo)</h1>
+            <h1>EverLingo</h1>
             <form id='loginForm' onSubmit={e=>{e.preventDefault()}}>
+            <img src={app_logo} alt="App Logo" className={style.AppLogo} />
                 <div className={style.Input}>
                     <div htmlFor="username"className={style.InputLabel}>Username: </div>
                     <input type="text" id="usernmae" name="username" placeholder="Username" className={style.InputBox} value={username} onChange={e=>setUsername(e.target.value)}/>
@@ -61,14 +61,6 @@ const LoginForm = () => {
                 <div className={style.Input}>
                     <div htmlFor="password"className={style.InputLabel}>Password: </div>
                     <input type="password" id="password" name="password" placeholder="Password" className={style.InputBox} value={password} onChange={e=>setPassword(e.target.value)}/>
-                </div>
-                <div className={style.Input}>
-                    <div htmlFor="team" className={style.InputLabel}>Team: </div>
-                    <select id="team" name="team" value={team} onChange={e=>setTeam(e.target.value)} className={style.InputBox}>
-                        <option value="Hercules">Hercules</option>
-                        <option value="Perceus">Perceus</option>
-                        <option value="Zagreus">Zagreus</option>
-                    </select>
                 </div>
                 <div className={style.Submit} onClick={handleSubmit}>
                     Submit
