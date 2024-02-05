@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from src.schemas.user_schemas import *
 from src.schemas.auth_schemas import *
 from src.controllers.auth_controller import Authoriser
-from src.dependencies.dependencies import player_jwt_token_checker, gl_jwt_token_checker, facilitator_jwt_token_checker
+from src.dependencies.dependencies import player_jwt_token_checker
 from fastapi.responses import JSONResponse
 auth_router = APIRouter()
 
@@ -66,9 +66,3 @@ async def get_test():
     authoriser = await Authoriser.get_instance()
     response = await authoriser.get_all_users()
     return response
-
-@auth_router.post(
-        path="/test_protected",
-        tags=["auth", "misc"])
-async def test_protected(user:str = Depends(player_jwt_token_checker)):
-    return user

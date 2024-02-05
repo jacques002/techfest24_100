@@ -20,7 +20,8 @@ class ChangePasswordRequest(BaseModel):
         if not any(char.islower() for char in v):
             raise ValueError('Password must contain at least 1 lowercase character')
         if not any(char.isdigit() for char in v):
-            raise Val
+            raise ValueError('Password must contain at least 1 number')
+        return v
             
 class RegisterRequest(BaseModel):
     username: str = Field(...,description="Username of the Account")

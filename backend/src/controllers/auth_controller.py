@@ -46,6 +46,20 @@ class Authoriser:
             return JSONResponse(status_code=400, content={'message': f"Error: {register_request.username} not created"})
         return JSONResponse(status_code=200, content={'message': f"Success: {register_request.username} created"})
 
+    async def change_password(self, change_password_request:ChangePasswordRequest) -> JSONResponse:
+        """
+        Changes the password of a user.
+        """
+        response = await self.user_model.get_user(change_password_request.username)
+
+        if response and bcrypt.checkpw(change_password_request.old_password.encode('utf-8'), response['password'].encode('utf-8')):
+            new_password = bcrypt.hashpw(change_password_request.new_password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+            response = await self.user_model.update_user(change_password_request.username, "set password = :password", {':password': new_password})
+            if response['ResponseMetadata']['HTTPStatusCode'] != 200:
+                return JSONResponse(status_code=400, content={'message': f"Error: {change_password_request.username} not updated"})
+            return JSONResponse(status_code=200, content={'message': f"Success: {change_password_request.username} updated"})
+        return JSONResponse(status_code=401, content={'message': f"Error: {change_password_request.username} not found or password is incorrect"})
+
     async def _issue_jwt(self,user:User) -> JSONResponse:
         """
         Issues a jwt token to user
@@ -58,9 +72,8 @@ class Authoriser:
             "exp": datetime.utcnow() + timedelta(hours=12) # 12 hours
         }
         self.username_uuid_map[user.username] = uuid_str
-        print(self.username_uuid_map.get(user.username,None))
+
         token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
-        
         return JSONResponse(status_code=200, content={'token': token})
 
     async def authenticate_user_uuid(self, username, uuid):
