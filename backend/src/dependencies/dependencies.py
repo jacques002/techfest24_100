@@ -18,9 +18,8 @@ async def player_jwt_token_checker(authorization: str = Header(None)):
         # Add more checks if needed
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
-    # if payload['role'] != 'player':
-    #     raise HTTPException(status_code=401, detail="Unauthorized")
+    
     authoriser = await Authoriser.get_instance()
-    if not await authoriser.authenticate_user_uuid(payload['username'],payload['uuid']):
-        raise HTTPException(status_code=401, detail="Invalid token")
+    # if not await authoriser.authenticate_user_uuid(payload['username'],payload['uuid']):
+    #     raise HTTPException(status_code=401, detail="Invalid token")
     return User(**payload)
