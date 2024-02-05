@@ -1,0 +1,13 @@
+@import "../../styles/theme.scss";
+
+.text_box {
+    outline: none;
+    border: 1px solid #ccc; // Example styling, adjust as needed
+    border-radius: 4px; // Example styling for rounded corners
+    margin: 2rem;
+    text-align: center;
+    &:focus {
+      border-color: #4A90E2; // Example styling for focus state
+    }
+  }
+  

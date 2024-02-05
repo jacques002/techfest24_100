@@ -1,0 +1,43 @@
+// Import any missing dependencies here
+
+// Define your color palette
+// $primary-color: #94e0f4;
+// $secondary-color: #F6ECDB;
+// $background-color: #818FB4;
+// $text-color: rgb(30, 27, 27);
+// $light: #FEFDCA;
+// $dark: #424874;
+// $darker: #2D3250;
+// $dark-1:#818FB4;
+// $dark-2:#363062;
+// $yellow: #FCE38A;
+// $green: #D5F0C1;
+// $light-green: #E0F9B5;
+// $red: #F38181;
+// $grey: #D3D3D3;
+$primary-light: #94e0f4;
+// $primary-color: #069679;
+$primary-color: #0d657b;
+$primary-text: #010101;
+$primary-darker: #0d657b;
+$primary-darker-2: #0a4f5e;
+$secondary-color: #F6ECDB;
+$background-color: #FFFBEF;
+$text-color: rgb(30, 27, 27);
+$light: #FEFDCA;
+$dark: #424874;
+$yellow: #FCE38A;
+$green: #D5F0C1;
+$light-green: #E0F9B5;
+$red: #F38181;
+$grey: #D3D3D3;
+
+
+$nav-menu-width:200px;
+$nav-bar-height:10vh;
+
+@mixin theme {
+  background-color: #F5EEE6;
+  color: $text-color;
+}
+  

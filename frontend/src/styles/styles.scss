@@ -1,0 +1,19 @@
+@import './typography'; 
+@import './theme';
+
+body{
+    @include theme;
+}
+
+.button{
+    background-color: $primary-color;
+    color: $text-color;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover{
+        background-color: $secondary-color;
+    }
+}

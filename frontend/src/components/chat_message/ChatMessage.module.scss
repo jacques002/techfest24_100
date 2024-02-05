@@ -1,0 +1,154 @@
+@import '../../styles/theme.scss';
+
+$chat-input-height: 10vh;
+.ChatMessageHolder{
+    display:flex;
+    flex-direction: column;
+    height: 100vh - $chat-input-height;
+    overflow: auto;
+    background-color: $dark;
+}
+.ChatBubble{
+    $space:2rem;
+    position: relative;
+    width: 30%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-top: $space;
+    &:nth-last-child(2){
+        margin-bottom: $space;
+    }
+    &.false{
+        animation: appear 0.5s ease-in-out;
+        @keyframes appear {
+            0%{
+                opacity: 0;
+                transform: scale(0);
+            }
+            100%{
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+       
+
+    }
+    
+
+    .ChatEntity{
+        font-weight: bold;
+        text-align: left;
+    }
+    .ChatMessage{
+        margin-top: 0.5rem;
+        word-wrap:break-word;
+        text-align: left;
+        width: calc(100% - 2 * $space);
+        &::first-letter{
+            text-transform: capitalize;
+        }
+    }
+    &.user{
+        align-self: flex-end;
+        margin-right: $space;
+        background-color: white;
+        color: black;
+        border-bottom-right-radius: 0px;
+        transform-origin: bottom right;
+        
+        .ChatEntity{
+            align-self: flex-start;
+            margin-left: $space;
+        }
+        .ChatMessage{
+            align-self: flex-start;
+            margin-left: $space;
+        }
+    }
+    &.narrator{
+        width: 60%;
+        font-style: italic;
+        align-self: center;
+        text-align: center;
+        color: white;
+        border-radius: 0px;
+        transform-origin: center;
+        // put system message in the middle
+        .ChatEntity{
+            align-self: center;
+            margin-left: 0px;
+        }
+        .ChatMessage{
+            align-self: center;
+            margin-left: 0px;
+            text-align: center;
+            width: 100%;
+        }
+
+    }
+    &.bot{
+        align-self: flex-start;
+        margin-left: $space;
+        background-color: $light;
+        color: black;
+        border-top-left-radius: 0px;
+        transform-origin: top left;
+        .ChatEntity{
+            align-self: flex-start;
+            margin-left: $space;
+        }
+        .ChatMessage{
+            align-self: flex-start;
+            margin-left: $space;
+        }
+    }   
+    
+}
+
+.ChatInput{
+    background-color: $light;
+    height: $chat-input-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .ChatTextArea{
+        width: 80%;
+        height: calc($chat-input-height - 2rem);
+        padding: 0px;
+        text-align: left;
+        font-size: 1rem;
+
+        resize: none;
+        border-radius: 0px;
+        //align text to top
+        &:focus{
+            outline: none;
+        }
+    }
+    .ChatButton{
+        filter: brightness(3);
+        background-color: $dark;
+        user-select: none;
+        width: 5%;
+        height: calc($chat-input-height - 2rem);
+        border: 0.5px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &:hover{
+            filter: brightness(1);
+            color: white;
+        }
+        &.true{
+            filter: brightness(1);
+            color: white;
+            &.SendButton{
+                background-color: gray;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
