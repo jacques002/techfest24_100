@@ -2,9 +2,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os 
 from dotenv import load_dotenv
+load_dotenv()
 from src.routers.explain_router import explain_router
 from src.routers.chat_router import chat_router
-load_dotenv()
 
 from src.routers.explain_router import explain_router
 from src.routers.auth_routers import auth_router
