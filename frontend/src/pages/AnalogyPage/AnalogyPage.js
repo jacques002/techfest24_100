@@ -1,53 +1,59 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './AnalogyPage.module.scss';
 import axios from 'axios';
-import WordCard from './components/WordCard.js';
 import TextBox from '../../components/text_box/TextBox.js';
 import { GiSpellBook } from "react-icons/gi";
 import axiosInstance from '../../utils/axiosinstance.js';
+import { MdReadMore } from "react-icons/md";
+import Modal from './components/Modal.js';
 
 const AnalogyPage = () => {
-    const [newWord, setNewWord] = React.useState('happiness');
-    const [imgLink, setImgLink] = React.useState('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=1352&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    const [analogy, setAnalogy] = React.useState('analogy');
-    const [definition, setDefinition] = React.useState('definition');
+    const host = process.env.REACT_APP_BACKEND;
+    const [newWord, setNewWord] = React.useState('');
+    const [imgLink, setImgLink] = React.useState('');
+    const [definitionList, setDefinitionList] = React.useState([]);
     const [openWordCard, setOpenWordCard] = React.useState(false);
+    const [openModal, setOpenModal] = React.useState(false);
+    const [selectedDefinitionIndex, setSelectedDefinitionIndex] = useState(null);
 
     const word_dictionary = {}
 
     const getDefinition = async () => {
         try {
-            const headers={headers:
-                {
-                    'Authorization':localStorage.getItem('token')
-                }}            
-            const response = await axiosInstance.get(`https://techfest24-100-backend.onrender.com/explain/get_definition?query=${newWord}`,headers);
-            console.log(newWord);
-            console.log(response.data.content);
+const headers={headers:
+    {
+        'Authorization':localStorage.getItem('token')
+    }}            
+const response = await axiosInstance.get(`https://techfest24-100-backend.onrender.com/explain/get_definition?query=${newWord}`,headers);
             const def_array = response.data.content.map(item => item.definition);
-            console.log(def_array);
+            // all definitions in an array
+            // console.log(def_array);
+            // output each definition
             if (!word_dictionary[newWord]) word_dictionary[newWord] = [];
             def_array.forEach((def) => {
                 word_dictionary[newWord].push({ "definition": def, "analogy": "" }); // Assuming analogy is blank for new definitions
             });
-            console.log('here');
-            console.log(word_dictionary[newWord][0]['definition']);
-            setDefinition(def_array);
+            // console.log('here');
+            // console.log(word_dictionary[newWord][0].definition);
+            setDefinitionList(word_dictionary[newWord]);
         } catch (error) {
             console.log(error);
         }
     };
 
-    //api issue code 200
-    const getAnalogy = async () => {
+    const getImgLink = async () => {
         try {
-            const response = await axios.get(`https://techfest24-100-backend.onrender.com/explain/get_analogy?query=${newWord}`);
-            setAnalogy(response.data.content[0].analogy);
+            const response = await axios.get(`https://techfest24-100-backend.onrender.com/explain/get_image?query=${newWord}`);
+            console.log(response);
+
+            if (response.data.status === "success") {            
+                console.log(response.data.url);
+                setImgLink(response.data.url);
+            }
         } catch (error) {
             console.log(error);
         }
     };
-
 
     const handleNewWord = (input) => {
         setNewWord(input);
@@ -55,9 +61,14 @@ const AnalogyPage = () => {
 
     const handleClick = async () => {
         setOpenWordCard(true); // Open the word card
+        await getImgLink();
         await getDefinition(); // Fetch the definition
-        await getAnalogy(); // Fetch the analogy
     };
+
+    const handleOpenModal = (index) => {
+        setOpenModal(!openModal);
+        setSelectedDefinitionIndex(index);
+    }
 
     return (
         <div>
@@ -84,25 +95,29 @@ const AnalogyPage = () => {
                         <GiSpellBook className={styles.search_button} style={{ width: "5vw" }} onClick={() => handleClick()} />
                     </div>
                     <div>
-                        <pre>{JSON.stringify(word_dictionary.newWord, null, 2)}</pre>
                     </div>
                     <div>
-                        {word_dictionary[newWord] ? (
-                            word_dictionary[newWord].map((item, index) => (
-                                <div key={index} className={styles.card}>
-                                    <div className={styles.definition}>{item.definition}</div>
+                        {definitionList.map((item, index) => (
+                            <div key={index}> {/* Ensure the key is at the top level of the map callback */}
+                                <div className={styles.card}>
+                                    <p>{item.definition}</p>
+                                    <div className={styles.button_box}>
+                                        <MdReadMore className={styles.icon_button} onClick={() => handleOpenModal(index)} />
+                                    </div>
                                 </div>
-                            ))
-                        ) : (
-                            <p>No definitions found for "{newWord}".</p> // This will show if the condition is false
-                        )}
-                    </div>
+                                {openModal && selectedDefinitionIndex === index && (
+                                    <div className={styles.modal_backdrop} onClick={() => setOpenModal(false)}>
+                                        <div className={styles.modal_container} onClick={(event) => event.stopPropagation()}>
+                                            {/* Directly pass the selected definition to the Modal */}
+                                            <Modal definition={definitionList[selectedDefinitionIndex].definition} />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
 
-                    <div className={styles.card}>
-                        <p>{analogy}</p>
                     </div>
                 </div>
-
             )}
         </div>
     )
