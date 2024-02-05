@@ -29,17 +29,6 @@ Protected routes
 async def check_token(user:User = Depends(player_jwt_token_checker)):
         return JSONResponse(status_code=200, content={'message': f"Success: {user.username} authenticated"})
 
-
-@auth_router.post(
-        path="/user/change_password",
-        tags=["auth", "user"])
-async def user_change_password(change_password_request:ChangePasswordRequest, user:User = Depends(player_jwt_token_checker)):
-    if change_password_request.username != user.username:
-        return JSONResponse(status_code=401, content={'message': f"Error: {user.username} not authorized to change password for {change_password_request.username}"})
-    authoriser = await Authoriser.get_instance()
-    response = await authoriser.change_password(change_password_request)
-    return response
-
 """
 Test routes
 """
