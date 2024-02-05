@@ -114,7 +114,7 @@ class Database:
             return "200" 
 
     async def query_n_most_recent(self, table_name, key): #, expression_attribute_values
-        X = 1
+        X = 5
 
         async with self.session.resource(
             'dynamodb',

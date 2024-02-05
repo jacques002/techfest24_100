@@ -1,6 +1,10 @@
 from fastapi import APIRouter, Depends
 from src.controllers.explain_controller import ExplainController
 from src.schemas.explain_schemas import ExplainRequest, AIDefinitionReponse, AIAnalogyReponse, AIExampleReponse,ImageResponse
+from src.controllers.history_controller import HistoryController
+from src.dependencies.dependencies import player_jwt_token_checker
+from src.schemas.user_schemas import *
+from src.schemas.search_schemas import UserSearchHistory
 
 explain_router = APIRouter()
 
@@ -16,9 +20,27 @@ async def get_image(explainRequest:ExplainRequest=Depends()):
     path='/explain/get_definition',
     tags=["dictionary"],
     response_model=AIDefinitionReponse)
-async def get_definition(explainRequest:ExplainRequest=Depends()):
+async def get_definition(explainRequest:ExplainRequest=Depends(), user:User = Depends(player_jwt_token_checker)):
     explainController = await ExplainController().get_instance()
-    return await explainController.get_definition(explainRequest)
+    output = await explainController.get_definition(explainRequest)
+
+    if output:
+        historyController = await HistoryController().get_instance()
+        # Create an instance of UserSearchHistory
+        first_element = (output.content)[0]
+        
+        search_history = UserSearchHistory(
+            username= user.username,
+            article= first_element.article,
+            definition=first_element.definition,
+            type=first_element.type,
+            url=''
+        )
+        await historyController.put_history(search_history)
+
+    return output
+
+    # return await explainController.get_definition(explainRequest)
 
 @explain_router.get(
     path='/explain/get_analogy',
