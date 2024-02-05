@@ -1,0 +1,62 @@
+@import '../../styles/theme.scss';
+
+.navbar{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    $padding-height:2vh;
+    padding-bottom: $padding-height;
+    background-color: $light;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: $nav-bar-height - $padding-height;
+    width: 100vw;
+    z-index: 101;
+    position: relative; 
+}
+
+.navbar_back{
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100%; 
+    background-color: $light; 
+    z-index: 101; 
+    opacity: 1; 
+}
+
+.h1{
+    flex-grow: 1;
+    text-align: center;
+    position: absolute; 
+    width: 100%; 
+    top: 0; 
+}
+
+.menu_icon{
+    position: absolute; 
+    top: 0.2rem; 
+    left: 1rem;
+    z-index: 101;
+    max-width: 50px;
+    cursor: pointer;
+}
+
+.app_logo{
+    position: absolute; 
+    right: 1rem;
+    width: 60px; /* Adjust width as needed */
+    max-height: 100%;
+}
+
+.header_link{
+    position: relative;
+    color: $dark;
+    font-weight: 800;
+    margin: 1rem;
+    text-decoration: none;
+    z-index: 102;
+    &:hover{
+        color: $primary-color;
+    }
+}

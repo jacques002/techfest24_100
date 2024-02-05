@@ -1,0 +1,14 @@
+@import '../../styles/theme.scss';
+
+.HomePage{
+    position: relative;
+    overflow-y: hidden;
+}
+.Outlet{
+    position: fixed;
+    left:200px;
+    top:10vh;
+    width: calc(100% - 200px);
+    height: calc(100% - 10vh);
+    overflow-y: auto;
+}

@@ -1,0 +1,44 @@
+@import '../../styles/theme.scss';
+
+.nav_memu{
+    position: absolute;
+    top:100%;
+    left: 0;
+    width: $nav-menu-width;
+    height: 100vh;
+    background-color: $background-color;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    
+    &.Close{
+        transition: all 0.5s 0s ease-in;
+        left: -100%;
+    }
+
+    &.Open{
+        transition: all 0.5s 0s ease-out;
+        left: 0;
+    }
+}
+
+.item_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    width: 100%;
+    background-color: $light;
+    &:hover{
+        background-color: $primary-color;
+    }
+}
+
+.nav_menu_item{
+    font-size: small;
+    padding: 0.5rem 1rem;
+    text-align: left;
+    display: block;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    user-select: none;
+}
