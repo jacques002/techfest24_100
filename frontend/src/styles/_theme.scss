@@ -37,19 +37,3 @@ $nav-bar-height:10vh;
   color: $text-color;
 }
   
-.button{
-  background-color: $light;
-  color: $text-color;
-  padding: 0.5rem 1rem;
-  min-width: 50px;
-  margin: 0.5rem;
-  border: none;
-  border-radius: 0.2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  &:hover{
-    background-color: $yellow;
-    font-weight: bold;
-  }
-}
-
