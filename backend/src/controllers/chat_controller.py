@@ -11,8 +11,8 @@ class ChatController:
             cls.instance=ChatController()
         return cls.instance
     
-    async def stream_response(self, new_message:str):
-        return await self.chatAgent.stream_response(new_message)
+    async def stream_response(self, data_dict:dict, username:str):
+        return await self.chatAgent.stream_response(data_dict, username)
     
     async def get_audio(self, chatAudioRequest:ChatAudioRequest):
         return await self.chatAgent.get_audio(chatAudioRequest)

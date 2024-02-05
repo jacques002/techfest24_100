@@ -2,14 +2,18 @@ from fastapi import APIRouter,WebSocket, Depends
 from fastapi.responses import Response
 from src.controllers.chat_controller import ChatController
 from src.schemas.chat_schemas import ChatAudioRequest, ChatBuildRequest,ChatGreetingRequest
+import json
 chat_router = APIRouter()
 
 @chat_router.websocket(
     path="/chat/stream_response")
-async def stream_response(websocket: WebSocket,new_message: str):
+async def stream_response(websocket: WebSocket):
     await websocket.accept()
     chatController = ChatController.get_instance()
-    stream = await chatController.stream_response(new_message)
+    json_data = await websocket.receive_text()
+    data_dict=json.loads(json_data)
+    print(data_dict)
+    stream = await chatController.stream_response(data_dict, "jacques")
     try:
         async for chunk in await stream:
             if chunk.choices[0].delta.content is not None:
