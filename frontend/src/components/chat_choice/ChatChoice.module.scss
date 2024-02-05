@@ -1,0 +1,60 @@
+@import '../../styles/styles.scss';
+
+.ChatChoice{
+    background-color: $light;
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:start;
+        label{
+            width: 20vw;
+            font-size: 1.5rem;
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 10px;
+            align-items: center;
+            justify-items: start;
+            input{
+                justify-self: end;
+                
+            }
+            textarea{
+                justify-self: end;
+                height: 20vh;
+            }
+            select{
+                justify-self: end;
+                width:100%;
+            }
+            option{
+                justify-self: end;
+            }
+        }
+        .SubmitButton{
+            width: 100%;
+            background-color: white;
+            margin-top: 10px;
+            border-radius: 2px;
+            align-self: center;
+            user-select: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            &:hover{
+                background-color: $primary-color;
+                filter:drop-shadow(0px 0px 5px black);
+                color: black;
+                transform: scale(0.9);
+            }
+        }
+        
+    }
+}

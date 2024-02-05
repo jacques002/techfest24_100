@@ -33,7 +33,7 @@
 }
 
 .image_container{
-    width: calc(100vw - $nav-menu-width);
+    width: 100%;
     height: 40vh;
     overflow: hidden;
     display: flex;
@@ -55,6 +55,57 @@
     text-align: left;    
 }
 
+.searchContainer{
+    position:absolute;
+    width: 100%;
+    height: 10vh;
+    // overflow: hidden;
+    background-color: black;
+    .searchbar{
+        height: 100%;
+        background-color: $primary-darker;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .search_button{
+            height: 50%;
+            width: 3vw;
+            border-radius: 1rem;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            &:hover{
+                color: $light;
+                
+                animation: blurer 2s ease-in-out 0s infinite normal forwards;
+                @keyframes blurer {
+                    0% {
+                        transform: rotateY(-15deg);
+                        
+                    }
+                    25% {
+                        transform: rotateY(15deg);
+                    }
+                    50% {
+                        transform: rotateY(-15deg);
+                    }
+                    75% {
+                        transform: rotateY(15deg);
+                    }
+                    100% {
+                        transform: rotateY(-15deg);
+                    }
+                }
+            }
+        }
+    }
+}
+.searchStack{
+    display: flex;
+    flex-direction: column;
+}
 .button_box {
     position: absolute;
     width: 8vw;

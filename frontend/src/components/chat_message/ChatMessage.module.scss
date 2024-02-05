@@ -4,7 +4,7 @@ $chat-input-height: 10vh;
 .ChatMessageHolder{
     display:flex;
     flex-direction: column;
-    height: 100vh - $nav-bar-height - $chat-input-height;
+    height: 100vh - $chat-input-height;
     overflow: auto;
     background-color: $dark;
 }
@@ -66,6 +66,27 @@ $chat-input-height: 10vh;
             align-self: flex-start;
             margin-left: $space;
         }
+    }
+    &.narrator{
+        width: 60%;
+        font-style: italic;
+        align-self: center;
+        text-align: center;
+        color: white;
+        border-radius: 0px;
+        transform-origin: center;
+        // put system message in the middle
+        .ChatEntity{
+            align-self: center;
+            margin-left: 0px;
+        }
+        .ChatMessage{
+            align-self: center;
+            margin-left: 0px;
+            text-align: center;
+            width: 100%;
+        }
+
     }
     &.bot{
         align-self: flex-start;
