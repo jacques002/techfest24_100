@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os 
 from dotenv import load_dotenv
+from src.routers.explain_router import explain_router
+from src.routers.chat_router import chat_router
 load_dotenv()
 
 from src.routers.explain_router import explain_router
@@ -22,6 +24,7 @@ app.add_middleware(
 
 app.include_router(explain_router)
 app.include_router(auth_router)
+app.include_router(chat_router)
 
 @app.get(
         path="/",
