@@ -1,8 +1,10 @@
 from openai import AsyncOpenAI
 from dotenv import load_dotenv
 from langchain.output_parsers import PydanticOutputParser
-from src.schemas.explain_schemas import AIDefinitionReponse, AIAnalogyReponse, AIExampleReponse, Status
+from src.schemas.explain_schemas import AIDefinitionReponse,Definition, AIAnalogyReponse, AIExampleReponse, Status
 from langchain.prompts import PromptTemplate
+import requests
+from urllib.parse import quote
 
 class ExplainAgent:
     def __init__(self):
@@ -13,6 +15,23 @@ class ExplainAgent:
         self.example_output_parser = PydanticOutputParser(pydantic_object=AIExampleReponse)
 
     async def gen_definitions(self, query:str):
+        # check the dict api before generating using openai
+        encoded_phrase = quote(query)
+        url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{encoded_phrase}"
+        response = requests.get(url)
+        
+        if response.ok:
+            json_data=response.json()
+            definitions=[]
+            indexer=1
+            for i in range(len(json_data)):
+                for j in range(len(json_data[i]['meanings'])):
+                    for k in range(len(json_data[i]['meanings'][j]['definitions'])):
+                        definitions.append(Definition(id=indexer,article=query,type=json_data[i]['meanings'][j]['partOfSpeech'],definition=json_data[i]['meanings'][j]['definitions'][k]['definition']))
+                        indexer+=1
+            return AIDefinitionReponse(status=Status.success,content=definitions)
+        else:
+            pass
         prompt = PromptTemplate(
             template="Answer the user query.\n{format_instructions}\n{query}\n",
             input_variables=["query"],
@@ -26,6 +45,7 @@ class ExplainAgent:
                 messages=[
                     {"role": "system", "content": f"""You are the world's best language professor who loves to teach. 
                     You help define whole words/phrases in as many interpretations as possible.
+                    If it is a phrase, you must explain it as a whole and place in id:1 before defining the words.
                     You must only repond with formatting of format_instructions below.
                     If no definitions are found, provide empty list.
                     """},
