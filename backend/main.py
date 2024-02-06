@@ -9,6 +9,7 @@ from src.routers.chat_router import chat_router
 from src.routers.explain_router import explain_router
 from src.routers.auth_routers import auth_router
 from src.routers.hist_routers import history_router
+from src.routers.story_routers import story_router
 
 
 environment = os.getenv("ENVIRONMENT")
@@ -28,6 +29,7 @@ app.include_router(explain_router)
 app.include_router(auth_router)
 app.include_router(chat_router)
 app.include_router(history_router)
+app.include_router(story_router)
 
 @app.get(
         path="/",

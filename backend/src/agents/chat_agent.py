@@ -20,13 +20,15 @@ class ChatAgent:
             'setting':{
                 'atmosphere':data_dict['personality'],
                 'location':data_dict['personality'],
-                'language': data_dict['language']
+                'language': data_dict['language'],
+                'language proficiency': data_dict['proficiency']
             },
         }
         messages = [{
             'role': 'system',
             'content': f"""You are {scenario_template['other_party']['name']} whose personality is {scenario_template['other_party']['personality']}.
             You must continue the roleplay in the situation as described below with the correct language, {scenario_template['setting']['language']}, found in settings.
+            Please scale difficulty according to the language proficiency, {scenario_template['setting']['language proficiency']}.
             {
                 scenario_template
             }
@@ -84,7 +86,8 @@ class ChatAgent:
             'setting':{
                 'atmosphere':chatBuildRequest.atmosphere,
                 'location':chatBuildRequest.location,
-                'language': chatBuildRequest.language
+                'language': chatBuildRequest.language,
+                'language proficiency': chatBuildRequest.proficiency
             },
         }
 
@@ -97,6 +100,7 @@ class ChatAgent:
                     You will first set the stage by narrating a very very short opening scene in 2 lines.
                     These are the details of the scenario. You must narrate from the perspective of the protagonist.
                     Pay attention to respond only with the the correct language, {scenario_template['setting']['language']}, found in settings.
+                    Please scale difficulty according to the language proficiency, {scenario_template['setting']['language proficiency']}.
                     {
                         scenario_template
                     }

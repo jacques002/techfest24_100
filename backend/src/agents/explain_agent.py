@@ -33,7 +33,7 @@ class ExplainAgent:
         else:
             pass
         prompt = PromptTemplate(
-            template="Answer the user query.\n{format_instructions}\n{query}\n",
+            template="\n{format_instructions}\n Define this: {query}\n",
             input_variables=["query"],
             partial_variables={"format_instructions": self.definition_output_parser.get_format_instructions()},
         )
@@ -48,6 +48,7 @@ class ExplainAgent:
                     If it is a phrase, you must explain it as a whole and place in id:1 before defining the words.
                     You must only repond with formatting of format_instructions below.
                     If no definitions are found, provide empty list.
+                    You can assume that every word/phrase given to you is meant to be defined,
                     """},
                     {"role": "user", "content": formatted_prompt},
                 ]

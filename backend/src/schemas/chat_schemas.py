@@ -16,6 +16,7 @@ class ChatBuildRequest(BaseModel):
     personality: str
     atmosphere: str
     location: str
+    proficiency: str
 
 class ChatResponseRequest(BaseModel):
     name: str

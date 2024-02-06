@@ -4,7 +4,7 @@ from src.schemas.search_schemas import UserSearchHistory
 import os
 from boto3.dynamodb.conditions import Key
 
-HISTORY_TABLE = "techfest24_100_dict"
+HISTORY_TABLE = os.getenv("HISTORY_TBLE_NAME")
 
 class SearchModel:
     table_name = ""

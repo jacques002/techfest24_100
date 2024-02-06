@@ -29,9 +29,6 @@ Protected routes
 async def check_token(user:User = Depends(player_jwt_token_checker)):
         return JSONResponse(status_code=200, content={'message': f"Success: {user.username} authenticated"})
 
-"""
-Test routes
-"""
 @auth_router.post(
         path="/user/register",
         tags=["auth", "user"])
@@ -40,18 +37,23 @@ async def user_register(register_request:RegisterRequest):
         response = await authoriser.register(register_request)
         return response
 
-@auth_router.get(
-        path="/delete_all_users",
-        tags=["auth", "user"])
-async def del_test():
-    authoriser = await Authoriser.get_instance()
-    response = await authoriser.delete_all_users()
-    return response
 
-@auth_router.get(
-        path="/get_all_users",
-        tags=["auth"])
-async def get_test():
-    authoriser = await Authoriser.get_instance()
-    response = await authoriser.get_all_users()
-    return response
+"""
+Test routes
+"""
+
+# @auth_router.get(
+#         path="/delete_all_users",
+#         tags=["auth", "user"])
+# async def del_test():
+#     authoriser = await Authoriser.get_instance()
+#     response = await authoriser.delete_all_users()
+#     return response
+
+# @auth_router.get(
+#         path="/get_all_users",
+#         tags=["auth"])
+# async def get_test():
+#     authoriser = await Authoriser.get_instance()
+#     response = await authoriser.get_all_users()
+#     return response
