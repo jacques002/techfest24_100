@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/techfest24_100/static/css/main.a5ef5dd4.css",
-    "main.js": "/techfest24_100/static/js/main.78e21c91.js",
+    "main.js": "/techfest24_100/static/js/main.2c5b821f.js",
     "static/js/787.bac7b4b3.chunk.js": "/techfest24_100/static/js/787.bac7b4b3.chunk.js",
     "static/media/app_logo.png": "/techfest24_100/static/media/app_logo.e90943576984dcf6b51e.png",
     "index.html": "/techfest24_100/index.html",
     "static/media/menu_icon.svg": "/techfest24_100/static/media/menu_icon.5361f6c8f2d0f975c228ad237b57be53.svg",
     "main.a5ef5dd4.css.map": "/techfest24_100/static/css/main.a5ef5dd4.css.map",
-    "main.78e21c91.js.map": "/techfest24_100/static/js/main.78e21c91.js.map",
+    "main.2c5b821f.js.map": "/techfest24_100/static/js/main.2c5b821f.js.map",
     "787.bac7b4b3.chunk.js.map": "/techfest24_100/static/js/787.bac7b4b3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a5ef5dd4.css",
-    "static/js/main.78e21c91.js"
+    "static/js/main.2c5b821f.js"
   ]
 }
