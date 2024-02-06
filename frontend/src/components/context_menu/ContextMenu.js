@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ContextMenu.module.scss';
 
-const ContextMenu = ({ isVisible, position, onCopy, onRead }) => {
+const ContextMenu = ({ isVisible, position, onCopy, onRead, handleDefine }) => {
   if (!isVisible) return null;
 
   const style = {
@@ -15,7 +15,7 @@ const ContextMenu = ({ isVisible, position, onCopy, onRead }) => {
 
   return (
     <div className={styles.context_box} style={style}>
-      <div className={styles.button} onClick={onCopy}>Define</div>
+      <div className={styles.button} onClick={handleDefine}>Define</div>
       <div className={styles.button} onClick={onRead}>Read</div>
       <div className={styles.button} onClick={onCopy}>Copy</div>
       {/* Add more buttons/options as needed */}

@@ -14,7 +14,9 @@ const ChatInput = (props) => {
         }
 
         const recognition = new SpeechRecognition();
-        // recognition.lang = 'zh-CN';// for chinese
+        if (props.formData.language === 'chinese') {
+            recognition.lang = 'zh-CN';// for chinese
+        }
         recognition.continuous = true;
         recognition.interimResults = true;
         recognition.onresult = event => {

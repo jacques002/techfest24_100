@@ -22,7 +22,7 @@ const LoginForm = () => {
             localStorage.setItem('token', 'Bearer ' + res.data.token);
             console.log(res.data);
             toast.success('Login Successful!');
-            navigate('/home/chat')
+            navigate('/home/stories')
         }).catch((err) => {
             toast.error('Login Failed!');
             console.log(err.response.data.message);

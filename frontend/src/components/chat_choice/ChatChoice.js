@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import styles from './ChatChoice.module.scss';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import axiosInstance from '../../utils/axiosinstance';
 
 const ChatChoice = (props) => {
     const audioRef = useRef(new Audio());
@@ -12,8 +13,12 @@ const ChatChoice = (props) => {
         language: '',
         personality: '',
         location:'',
-        atmosphere:''
+        atmosphere:'',
+        proficiency:''
       });
+      const headers = {
+        'authorization': localStorage.getItem('token')
+      }
 
       const handleChange = (e) => {
         //check if voice
@@ -22,7 +27,7 @@ const ChatChoice = (props) => {
           ...formData,
           [name]: value, 
         });
-        if ((e.target.name === 'voice' || e.target.name === 'language') && formData.language !== '' && formData.voice !== '') {
+        if ((e.target.name === 'voice' && formData.language !== '') || (e.target.name === 'language' && formData.voice !== '')  ) {
             const get_audio = async () =>{
                 try{
                     let voice = formData.voice;
@@ -35,8 +40,9 @@ const ChatChoice = (props) => {
                     language = e.target.value;
                     voice = formData.voice;
                 }
-                  const response = await axios.get(host+'/chat/get_greeting?voice='+voice+'&language='+language, {
+                  const response = await axiosInstance.get(host+'/chat/get_greeting?voice='+voice+'&language='+language, {
                     responseType: 'blob', // This tells Axios to expect a binary response
+                    headers: headers
                   });
                   const mp3Blob = response.data;
                   const url = URL.createObjectURL(mp3Blob);
@@ -57,7 +63,7 @@ const ChatChoice = (props) => {
       };
     
       const handleSubmit = (e) => {
-        if (formData.name === '' || formData.voice === '' || formData.language === '' || formData.personality === '' || formData.location === '' || formData.atmosphere === '') {
+        if (formData.name === '' || formData.voice === '' || formData.language === '' || formData.personality === '' || formData.location === '' || formData.atmosphere === '' || formData.proficiency === '') {
           toast.error('Please fill in all fields');
           return;
         }
@@ -73,7 +79,8 @@ const ChatChoice = (props) => {
                     language: '',
                     personality: '',
                     location:'',
-                    atmosphere:''
+                    atmosphere:'',
+                    proficiency:''
                     });
             }
             catch (error) {
@@ -87,7 +94,7 @@ const ChatChoice = (props) => {
       };
   return (
     <div className={styles.ChatChoice}>
-        <form onSubmit={handleSubmit}>
+        <form className={styles.Form}onSubmit={handleSubmit}>
             <h1>Scenario Builder</h1>
       <div>
         <label>
@@ -152,6 +159,18 @@ const ChatChoice = (props) => {
       </div>
       <div>
         <label>
+          Proficiency:
+          <select name="proficiency" value={formData.proficiency} onChange={handleChange}>
+            <option value="">Select Atmosphere</option>
+            <option value="no-proficiency">no proficiency</option>
+            <option value="elementary">elementary</option>
+            <option value="professional">professional</option>
+            <option value="native speaker">native speaker</option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <label>
           Location:
           <input
             type="text"
@@ -164,6 +183,7 @@ const ChatChoice = (props) => {
       
       <div className={styles.SubmitButton} onClick={handleSubmit}>Submit</div>
     </form>
+    <img src='https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt="Voice" className={styles.BackImage} />
     </div>
   )
 }

@@ -8,29 +8,29 @@ $text-color: #f8f3f3;
 $header-color: #3A3845;
 
 // Typography styles
-// body {
-//     font-family: $font-main;
-//     font-size: $font-size-base;
-//     line-height: $line-height-base;
-//     color: $text-color;
-//   }
+body {
+    font-family: $font-main;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $text-color;
+  }
   
-//   h1, h2, h3{
-//     font-family: $font-main;
-//     font-weight: bold;
-//     animation: text-fade-in 0.5s ease-in-out;
-//   }
+  h1, h2, h3{
+    font-family: $font-main;
+    font-weight: bold;
+    animation: text-fade-in 0.5s ease-in-out;
+  }
 
-//   h4{
-//     font-family: $font-subheader;
-//     color: $header-color;
-//   }
+  h4{
+    font-family: $font-subheader;
+    color: $header-color;
+  }
   
-//   h5, h6 {
-//     font-family: $font-text;
-//     font-weight: bold;
-//     font-size: 16px;
-//   }
+  h5, h6 {
+    font-family: $font-text;
+    font-weight: bold;
+    font-size: 16px;
+  }
   
   p {
     margin-bottom: 1em;

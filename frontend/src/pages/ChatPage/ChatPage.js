@@ -23,8 +23,12 @@ const ChatPage = () => {
     language: '',
     personality: '',
     location:'',
-    atmosphere:''
+    atmosphere:'',
+    proficiency:''
   });
+  const headers ={
+    'authorization': localStorage.getItem('token')
+  }
   
 
   useEffect(()=>{
@@ -83,6 +87,7 @@ const ChatPage = () => {
           try{
             const response = await axios.get(host+'/chat/get_audio?id='+'1'+'&text='+messageData +'&voice='+formData.voice, {
               responseType: 'blob',
+              headers: headers
             });
             const mp3Blob = response.data;
             const url = URL.createObjectURL(mp3Blob);
@@ -118,7 +123,7 @@ const ChatPage = () => {
   const sendScenario=(payload)=>{
     setFormData(payload)
     let messageData=''
-    const ws = new WebSocket(ws_host+'/chat/stream_scenario?name='+payload.name+'&voice='+payload.voice+'&language='+payload.language+'&personality='+payload.personality+'&location='+payload.location+'&atmosphere='+payload.atmosphere);
+    const ws = new WebSocket(ws_host+'/chat/stream_scenario?name='+payload.name+'&voice='+payload.voice+'&language='+payload.language+'&personality='+payload.personality+'&location='+payload.location+'&atmosphere='+payload.atmosphere+'&proficiency='+payload.proficiency);
 
     ws.onopen = () => {
       console.log('WebSocket connection established');
@@ -138,6 +143,7 @@ const ChatPage = () => {
           try{
             const response = await axios.get(host+'/chat/get_audio?id='+'1'+'&text='+messageData+'&voice='+payload.voice, {
               responseType: 'blob', // This tells Axios to expect a binary response
+              headers: headers
             });
             const mp3Blob = response.data;
             const url = URL.createObjectURL(mp3Blob);
@@ -170,7 +176,7 @@ const ChatPage = () => {
     <div>
       {openChoice===true && <ChatChoice sendScenario={sendScenario} />}
       <ChatMessageHolder messages={messages} lastMessage={lastMessage} openingMessage={openingMessage} formData={formData}/>
-      <ChatInput sendMessage={sendMessage}/>
+      <ChatInput sendMessage={sendMessage} formData={formData}/>
     </div>
   )
 }

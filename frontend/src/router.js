@@ -8,6 +8,7 @@ import Story from './pages/StoryPage/StoryPage.js'
 import Chat from './pages/ChatPage/ChatPage.js'
 
 const router = () => {
+  const location = window.location;
   return (
     <>
         <Routes>
@@ -16,7 +17,7 @@ const router = () => {
         <Route path="/register" element={<Register />}/>
 
         <Route path="/home" element={<Home />}>
-          <Route path="/home/dictionary" element={<Analogy />} />
+          <Route path="/home/dictionary" element={<Analogy key={location.search}/>} />
           <Route path="/home/stories" element={<Story />} />
           <Route path="/home/scenarios" element={<Chat />} />
           

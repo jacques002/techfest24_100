@@ -1,10 +1,13 @@
 @import '../../../styles/theme.scss';
 
 .modal_container{
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: white;
-    padding: 2rem;
-    width: 60vw;
-    position: relative;
+    width: 100%;
+    margin-right: 10%;
+    overflow: hidden;
 }
 
 .image{
@@ -16,19 +19,26 @@
     background-color: $background-color;
     transition: all 0.3s ease;
     cursor: pointer;
-    object-fit:cover;
-}
-
-.image_container{
-    width: calc(100vw - $nav-menu-width);
-    height: 40vh;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    object-fit: contain;
+    height: 100%;
+    //shadow
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.image_container{
+    position: relative;
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(4, 4, 4, 0.61);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(4, 4, 4, 0.3);
+}
 .card{
     display: flex;
     height: auto;
