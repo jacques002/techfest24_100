@@ -12,7 +12,7 @@ explain_router = APIRouter()
     path='/explain/get_image',
     tags=["dictionary"],
     response_model=ImageResponse)
-async def get_image(explainRequest:ExplainRequest=Depends()):
+async def get_image(explainRequest:ExplainRequest=Depends(), user:User = Depends(player_jwt_token_checker)):
     explainController = await ExplainController().get_instance()
     return await explainController.get_image(explainRequest)
 
@@ -20,23 +20,23 @@ async def get_image(explainRequest:ExplainRequest=Depends()):
     path='/explain/get_definition',
     tags=["dictionary"],
     response_model=AIDefinitionReponse)
-async def get_definition(explainRequest:ExplainRequest=Depends(), user:User = Depends(player_jwt_token_checker)):
+async def get_definition(explainRequest:ExplainRequest=Depends()):
     explainController = await ExplainController().get_instance()
     output = await explainController.get_definition(explainRequest)
 
-    if output:
-        historyController = await HistoryController().get_instance()
-        # Create an instance of UserSearchHistory
-        first_element = (output.content)[0]
+    # if len(output.content)>0:
+    #     historyController = await HistoryController().get_instance()
+    #     # Create an instance of UserSearchHistory
+    #     first_element = (output.content)[0]
         
-        search_history = UserSearchHistory(
-            username= user.username,
-            article= first_element.article,
-            definition=first_element.definition,
-            type=first_element.type,
-            url=''
-        )
-        await historyController.put_history(search_history)
+    #     search_history = UserSearchHistory(
+    #         username= user.username,
+    #         article= first_element.article,
+    #         definition=first_element.definition,
+    #         type=first_element.type,
+    #         url=''
+    #     )
+    #     await historyController.put_history(search_history)
 
     return output
 
@@ -46,7 +46,7 @@ async def get_definition(explainRequest:ExplainRequest=Depends(), user:User = De
     path='/explain/get_analogy',
     tags=["dictionary"],
     response_model=AIAnalogyReponse)
-async def get_analogy(explainRequest:ExplainRequest=Depends()):
+async def get_analogy(explainRequest:ExplainRequest=Depends(), user:User = Depends(player_jwt_token_checker)):
     explainController = await ExplainController().get_instance()
     return await explainController.get_analogy(explainRequest)
 
@@ -54,6 +54,6 @@ async def get_analogy(explainRequest:ExplainRequest=Depends()):
     path='/explain/get_example',
     tags=["dictionary"],
     response_model=AIExampleReponse)
-async def get_example(explainRequest:ExplainRequest=Depends()):
+async def get_example(explainRequest:ExplainRequest=Depends(), user:User = Depends(player_jwt_token_checker)):
     explainController = await ExplainController().get_instance()
     return await explainController.get_example(explainRequest)

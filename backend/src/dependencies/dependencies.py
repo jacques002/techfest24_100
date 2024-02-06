@@ -7,6 +7,7 @@ SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 ALGORITHM = os.getenv("JWT_ALGORITHM") 
 
 async def player_jwt_token_checker(authorization: str = Header(None)):
+    print(authorization)
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Not authenticated or invalid token format")
 
